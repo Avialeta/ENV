@@ -4,8 +4,12 @@ SSH_HOST = avialeta
 setup-dev:
 	scp -r $(PWD)/dev/systemd/* $(SSH_HOST):~/.config/systemd/user
 	ssh $(SSH_HOST) 'systemctl --user daemon-reload'
-	ssh $(SSH_HOST) 'systemctl --user enable avialeta.target'
-	ssh $(SSH_HOST) 'systemctl --user restart avialeta.target'
+	ssh $(SSH_HOST) 'systemctl --user enable avialeta-cache.service'
+	ssh $(SSH_HOST) 'systemctl --user enable avialeta-api.service'
+	ssh $(SSH_HOST) 'systemctl --user enable avialeta-ui.service'
+	ssh $(SSH_HOST) 'systemctl --user restart avialeta-cache.service'
+	ssh $(SSH_HOST) 'systemctl --user restart avialeta-api.service'
+	ssh $(SSH_HOST) 'systemctl --user restart avialeta-ui.service'
 
 build-dev-ui:
 	cd $(PWD)/dev/docker/ui && \
@@ -24,7 +28,9 @@ build-dev: build-dev-api build-dev-ui
 deploy-dev: build-dev
 	ssh $(SSH_HOST) 'docker pull fellah/avialeta-api'
 	ssh $(SSH_HOST) 'docker pull fellah/avialeta-ui'
-	ssh $(SSH_HOST) 'systemctl --user restart avialeta.target'
+	ssh $(SSH_HOST) 'systemctl --user restart avialeta-cache.service'
+	ssh $(SSH_HOST) 'systemctl --user restart avialeta-api.service'
+	ssh $(SSH_HOST) 'systemctl --user restart avialeta-ui.service'
 
 .DEFAULT_GOAL := deploy-dev
 

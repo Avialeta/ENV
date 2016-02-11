@@ -1,12 +1,10 @@
 [Unit]
 Description=Avialeta: Cache
-StopWhenUnneeded=yes
 
 [Service]
-ExecStartPre=-/usr/bin/docker rm avialeta-cache
+ExecStartPre=-/usr/bin/docker rm -v avialeta-cache
 ExecStart=/usr/bin/docker run \
 	--name avialeta-cache \
-	--rm \
 	redis:latest
 ExecStop=/usr/bin/docker stop avialeta-cache
 

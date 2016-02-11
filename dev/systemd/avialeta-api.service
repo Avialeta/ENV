@@ -1,6 +1,6 @@
 [Unit]
 Description=Avialeta: API
-StopWhenUnneeded=yes
+Requires=avialeta-cache.service
 
 [Service]
 ExecStartPre=-/usr/bin/docker rm -v avialeta-api

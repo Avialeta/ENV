@@ -1,6 +1,6 @@
 [Unit]
 Description=Avialeta: UI
-StopWhenUnneeded=yes
+Requires=avialeta-api.service
 
 [Service]
 ExecStartPre=-/usr/bin/docker rm -v avialeta-ui
