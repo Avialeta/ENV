@@ -1,6 +1,6 @@
 FROM nginx:latest
 
-#COPY default.conf /etc/nginx/conf.d/default.conf
+COPY default.conf /etc/nginx/conf.d/default.conf
 
 ADD https://github.com/Avialeta/UI/archive/DEV.tar.gz /tmp/ui-DEV.tar.gz
 RUN tar \

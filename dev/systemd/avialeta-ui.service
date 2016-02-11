@@ -1,0 +1,15 @@
+[Unit]
+Description=Avialeta: UI
+StopWhenUnneeded=yes
+
+[Service]
+ExecStartPre=-/usr/bin/docker rm -v avialeta-ui
+ExecStart=/usr/bin/docker run \
+	--link avialeta-api \
+	--publish 80:80 \
+	--name avialeta-ui \
+	fellah/avialeta-ui
+ExecStop=/usr/bin/docker stop avialeta-ui
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,6 @@
+[Unit]
+Description=Avialeta
+Requires=avialeta-cache.service avialeta-api.service avialeta-ui.service
+
+[Install]
+WantedBy=default.target

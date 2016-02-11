@@ -1,0 +1,15 @@
+[Unit]
+Description=Avialeta: API
+StopWhenUnneeded=yes
+
+[Service]
+ExecStartPre=-/usr/bin/docker rm -v avialeta-api
+ExecStart=/usr/bin/docker run \
+	--link avialeta-cache \
+	-e TRIPCLOUD_PASSWORD=Jsa7EtSzaGcbIPEe \
+	--name avialeta-api \
+	fellah/avialeta-api
+ExecStop=/usr/bin/docker stop avialeta-api
+
+[Install]
+WantedBy=default.target
